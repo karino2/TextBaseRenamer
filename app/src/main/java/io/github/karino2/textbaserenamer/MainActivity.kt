@@ -43,12 +43,6 @@ class MainActivity : ComponentActivity() {
         outState.putString("RIGHT_NAMES", rightNames.value)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        targetUri = Uri.parse(savedInstanceState.getString("TARGET_URI"))
-        leftNames.value = savedInstanceState.getString("LEFT_NAMES", "")
-        leftNames.value = savedInstanceState.getString("LEFT_NAMES", "")
-        super.onRestoreInstanceState(savedInstanceState)
-    }
 
 
     fun updateDir(dirUri: Uri) {
@@ -65,6 +59,12 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        savedInstanceState?.let {
+            targetUri = Uri.parse(it.getString("TARGET_URI"))
+            leftNames.value = it.getString("LEFT_NAMES", "")
+            rightNames.value = it.getString("RIGHT_NAMES", "")
+        }
+
         setContent {
             TextBaseRenamerTheme {
                 // A surface container using the 'background' color from the theme
@@ -96,7 +96,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-
         if (targetUri == null)
         {
             getNewDirectory.launch(null)
