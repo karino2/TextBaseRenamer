@@ -1,5 +1,6 @@
 package io.github.karino2.textbaserenamer
 
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -17,6 +18,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import io.github.karino2.textbaserenamer.ui.theme.TextBaseRenamerTheme
 
 class MainActivity : ComponentActivity() {
@@ -144,13 +146,26 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TwoPane(textBefore: String, textAfter: String, onBeforeTextChanged: (String)->Unit, onAfterTextChanged: (String)->Unit) {
-
-    Column(Modifier.fillMaxSize()) {
-        TextField( value = textBefore, onValueChange = onBeforeTextChanged, label= { Text("Before") }, modifier = Modifier
-            .weight(1f)
-            .fillMaxWidth())
-        TextField( value = textAfter, onValueChange = onAfterTextChanged, label= { Text("After") }, modifier = Modifier
-            .weight(1f)
-            .fillMaxWidth() )
+    when (LocalConfiguration.current.orientation) {
+        Configuration.ORIENTATION_LANDSCAPE-> {
+            Row(Modifier.fillMaxSize()) {
+                TextField( value = textBefore, onValueChange = onBeforeTextChanged, label= { Text("Before") }, modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight())
+                TextField( value = textAfter, onValueChange = onAfterTextChanged, label= { Text("After") }, modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight() )
+            }
+        }
+        else -> {
+            Column(Modifier.fillMaxSize()) {
+                TextField( value = textBefore, onValueChange = onBeforeTextChanged, label= { Text("Before") }, modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth())
+                TextField( value = textAfter, onValueChange = onAfterTextChanged, label= { Text("After") }, modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth() )
+            }
+        }
     }
 }
