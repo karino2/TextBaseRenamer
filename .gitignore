@@ -1,0 +1,5 @@
+.gradle
+.idea/modules.xml
+.idea/libraries
+.idea/modules
+local.properties
