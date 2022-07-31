@@ -18,7 +18,9 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.dp
 import io.github.karino2.textbaserenamer.ui.theme.TextBaseRenamerTheme
 
 class MainActivity : ComponentActivity() {
@@ -152,6 +154,7 @@ fun TwoPane(textBefore: String, textAfter: String, onBeforeTextChanged: (String)
                 TextField( value = textBefore, onValueChange = onBeforeTextChanged, label= { Text("Before") }, modifier = Modifier
                     .weight(1f)
                     .fillMaxHeight())
+                Divider(color = Color.Black, modifier = Modifier.fillMaxHeight().width(2.dp), thickness = 2.dp)
                 TextField( value = textAfter, onValueChange = onAfterTextChanged, label= { Text("After") }, modifier = Modifier
                     .weight(1f)
                     .fillMaxHeight() )
@@ -162,6 +165,7 @@ fun TwoPane(textBefore: String, textAfter: String, onBeforeTextChanged: (String)
                 TextField( value = textBefore, onValueChange = onBeforeTextChanged, label= { Text("Before") }, modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth())
+                Divider(color = Color.Black, modifier = Modifier.fillMaxWidth().height(2.dp), thickness = 2.dp)
                 TextField( value = textAfter, onValueChange = onAfterTextChanged, label= { Text("After") }, modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth() )
