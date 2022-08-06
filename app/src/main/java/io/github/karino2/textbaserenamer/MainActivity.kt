@@ -130,6 +130,7 @@ class MainActivity : ComponentActivity() {
             }
         clearContent()
         showMessage("Rename done.")
+        finish()
     }
 
     fun clearContent() {
